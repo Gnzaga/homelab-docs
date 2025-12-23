@@ -66,8 +66,8 @@ theme:
     edit: material/pencil
     view: material/eye
 
-  # Custom directory for overrides
-  custom_dir: overrides
+  # Custom directory for overrides (uncomment when overrides/ exists)
+  # custom_dir: overrides
 
 # Plugins
 plugins:
@@ -113,9 +113,7 @@ markdown_extensions:
   - pymdownx.keys                 # Keyboard keys
   - pymdownx.mark                 # Highlighting
   - pymdownx.smartsymbols         # Smart symbols
-  - pymdownx.snippets:            # Include files
-      auto_append:
-        - includes/abbreviations.md
+  - pymdownx.snippets             # Include files
   - pymdownx.superfences:         # Enhanced fenced code
       custom_fences:
         - name: mermaid
