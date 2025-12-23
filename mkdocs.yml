@@ -1,0 +1,216 @@
+# MkDocs Configuration - Homelab Documentation
+# https://squidfunk.github.io/mkdocs-material/
+
+site_name: Homelab Documentation
+site_description: Infrastructure and architecture documentation for the homelab Kubernetes cluster
+site_author: Homelab Team
+site_url: https://docs.homelab.local
+
+# Repository (optional - enables edit links)
+repo_name: homelab-docs
+repo_url: https://github.com/YOUR_USERNAME/homelab-docs
+edit_uri: edit/main/docs/
+
+# Theme configuration
+theme:
+  name: material
+  language: en
+
+  # Color palette with dark/light toggle
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  # Features
+  features:
+    # Navigation
+    - navigation.instant          # XHR loading for speed
+    - navigation.instant.prefetch # Prefetch on hover
+    - navigation.tracking         # URL updates with anchor
+    - navigation.tabs             # Top-level tabs
+    - navigation.tabs.sticky      # Tabs stay visible on scroll
+    - navigation.sections         # Render sections as groups
+    - navigation.expand           # Expand sections by default
+    - navigation.path             # Breadcrumbs
+    - navigation.top              # Back to top button
+    - navigation.footer           # Prev/next navigation
+
+    # Table of contents
+    - toc.follow                  # TOC follows scroll
+    - toc.integrate               # TOC in left sidebar
+
+    # Search
+    - search.suggest              # Search suggestions
+    - search.highlight            # Highlight search terms
+    - search.share                # Share search results
+
+    # Content
+    - content.code.copy           # Copy button for code blocks
+    - content.code.annotate       # Code annotations
+    - content.tabs.link           # Linked content tabs
+    - content.tooltips            # Improved tooltips
+
+  # Icons
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+  # Custom directory for overrides
+  custom_dir: overrides
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+      lang:
+        - en
+  - minify:
+      minify_html: true
+  # Enable tags
+  - tags:
+      tags_file: tags.md
+
+# Markdown extensions
+markdown_extensions:
+  # Python Markdown
+  - abbr                          # Abbreviations
+  - admonition                    # Callout blocks
+  - attr_list                     # Add attributes to elements
+  - def_list                      # Definition lists
+  - footnotes                     # Footnotes
+  - md_in_html                    # Markdown in HTML
+  - tables                        # Tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+  # PyMdown Extensions
+  - pymdownx.arithmatex:          # Math formulas
+      generic: true
+  - pymdownx.betterem:            # Improved emphasis
+      smart_enable: all
+  - pymdownx.caret                # Superscript
+  - pymdownx.details              # Collapsible details
+  - pymdownx.emoji:               # Emoji support
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:           # Code highlighting
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite         # Inline code highlighting
+  - pymdownx.keys                 # Keyboard keys
+  - pymdownx.mark                 # Highlighting
+  - pymdownx.smartsymbols         # Smart symbols
+  - pymdownx.snippets:            # Include files
+      auto_append:
+        - includes/abbreviations.md
+  - pymdownx.superfences:         # Enhanced fenced code
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:              # Content tabs
+      alternate_style: true
+  - pymdownx.tasklist:            # Task lists
+      custom_checkbox: true
+  - pymdownx.tilde                # Subscript and strikethrough
+
+# Extra configuration
+extra:
+  # Social links
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/YOUR_USERNAME
+      name: GitHub
+
+  # Version provider (optional)
+  # version:
+  #   provider: mike
+
+  # Analytics (optional)
+  # analytics:
+  #   provider: google
+  #   property: G-XXXXXXXXXX
+
+  # Status indicators for pages
+  status:
+    new: Recently added
+    deprecated: Deprecated
+
+# Extra CSS
+extra_css:
+  - stylesheets/extra.css
+
+# Navigation structure
+nav:
+  - Home: index.md
+
+  - Kubernetes:
+    - Overview: kubernetes/index.md
+    - Cluster Setup:
+      - Talos Linux: kubernetes/talos-setup.md
+      - Node Configuration: kubernetes/node-config.md
+      - Networking: kubernetes/cluster-networking.md
+    - Workloads:
+      - Deployments: kubernetes/deployments.md
+      - StatefulSets: kubernetes/statefulsets.md
+      - Jobs & CronJobs: kubernetes/jobs.md
+    - Storage:
+      - NFS CSI: kubernetes/nfs-csi.md
+      - Persistent Volumes: kubernetes/persistent-volumes.md
+    - Security:
+      - RBAC: kubernetes/rbac.md
+      - Network Policies: kubernetes/network-policies.md
+      - Pod Security: kubernetes/pod-security.md
+
+  - Networking:
+    - Overview: networking/index.md
+    - Ingress:
+      - NGINX Ingress: networking/nginx-ingress.md
+      - TLS & Certificates: networking/tls-certificates.md
+    - Service Mesh:
+      - Istio: networking/istio.md
+    - Load Balancing:
+      - MetalLB: networking/metallb.md
+    - DNS:
+      - CoreDNS: networking/coredns.md
+      - External DNS: networking/external-dns.md
+
+  - AI Platforms:
+    - Overview: ai-platforms/index.md
+    - Kubeflow: ai-platforms/kubeflow.md
+    - Open WebUI: ai-platforms/openwebui.md
+    - Label Studio: ai-platforms/labelstudio.md
+    - Spark: ai-platforms/spark.md
+
+  - Operations:
+    - Overview: operations/index.md
+    - GitOps:
+      - ArgoCD: operations/argocd.md
+    - Secrets:
+      - Vault: operations/vault.md
+    - Monitoring:
+      - Prometheus: operations/prometheus.md
+      - Grafana: operations/grafana.md
+    - Authentication:
+      - Authentik: operations/authentik.md
+      - OIDC Integration: operations/oidc.md
+    - Backup:
+      - Velero: operations/velero.md
+
+  - Reference:
+    - Cheatsheets: reference/cheatsheets.md
+    - Troubleshooting: reference/troubleshooting.md
+    - Tags: tags.md
